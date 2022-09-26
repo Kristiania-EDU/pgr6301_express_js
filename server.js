@@ -3,7 +3,15 @@ import express from 'express';
 const app = express();
 
 app.get('/login', (req, res) => {
-   res.send('You reaced /login');
+   res.json({
+      username: 'Hello'
+   });
+});
+
+app.post('/login', (req, res) => {
+   // set something so that GET /login returns user name
+
+
 });
 
 const server = app.listen(process.env.PORT || 3000, () => {
