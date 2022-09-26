@@ -4,6 +4,7 @@ Use Node.js with ExpressJS to setup a server.
 
 # What this repository solves
 
+* [ ]  Setup Node.js with Express
 * [ ] Respond to simple request
   * [ ] GET request
   * [ ] POST request
