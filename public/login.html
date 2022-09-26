@@ -3,8 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-</head>
-<body>
+    <head>
+        <style>
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+                width: 200px;
+            }
 
+            form div {
+                width: 100%;
+            }
+
+            form label {
+                display: block;
+            }
+
+            form input {
+                padding: .25rem .5rem;
+                border-radius: 5px;
+                border: 1px solid #dfdfdf;
+            }
+
+            form button {
+                border-radius: 5px;
+                border: 1px solid #dfdfdf;
+                background: #dfdfdf;
+                width: 100%;
+            }
+        </style>
+    </head>
+</head>
+
+<body>
+    <h1>Log in</h1>
+
+    <form action="/login" method="POST">
+        <div>
+            <label>Username: </label>
+            <input type="text" name="username"/>
+        </div>
+        <div>
+            <label>Password: </label>
+            <input type="text" name="password"/>
+        </div>
+        <div>
+            <button type="submit">Log in</button>
+        </div>
+    </form>
 </body>
 </html>

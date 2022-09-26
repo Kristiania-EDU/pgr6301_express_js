@@ -1,10 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
+app.use(cookieParser(process.env.COOKIES_SECRET || 'Test'));
 app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(bodyParser.urlencoded({
+   extended: false
+}));
 app.use(express.static('public'));
 
 const USERS = [
@@ -22,7 +28,7 @@ const USERS = [
  * to the signed on user
  * */
 app.get('/login', (req, res) => {
-   const user = USERS.find(x => x.username === req.cookies.username);
+   const user = USERS.find(x => x.username === req.signedCookies.username);
    const { username, fullName } = user;
 
    res.json({
@@ -40,13 +46,30 @@ app.post('/login', (req, res) => {
    const body = req.body;
    const { username, password } = body;
 
+   console.log('Username and password: ', { username, password });
+
    const user = USERS.find(x => x.username === username && x.password == password);
 
    if(user) {
       res.cookie('username', username)
       res.sendStatus(200);
    } else {
-      res.sendStatus(401);
+      res.send(401);
+   }
+});
+
+app.post('/register', (req, res) => {
+   const body = req.body;
+   const { username, password } = body;
+
+   if(USERS.find(x => x.username === username)) {
+      res.send('Username already exists');
+   } else {
+      USERS.push({
+         username, password
+      });
+
+      res.send('User registered');
    }
 });
 
