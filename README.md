@@ -4,13 +4,13 @@ Use Node.js with ExpressJS to setup a server.
 
 # What this repository solves
 
-* [ ]  Setup Node.js with Express
-* [ ] Respond to simple request
-  * [ ] GET request
-  * [ ] POST request
-* [ ] JSON Parsing
-* [ ] Static files 
-* [ ] Cookies
+* [X]  Setup Node.js with Express
+* [X] Respond to simple request
+  * [X] GET request
+  * [X] POST request
+* [X] JSON Parsing
+* [X] Cookies
+* [ ] Static files
 * [ ] Express middleware
   * [ ] Enforce user is logged in
 * [ ] Routes

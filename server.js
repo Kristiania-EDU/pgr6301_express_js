@@ -1,19 +1,32 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 const USERS = [
    {
-      username: 'admin',
-      password: '1234'
+      username: 'administrator',
+      password: '1234',
+      fullName: 'Admini Strator'
    }
 ];
 
+/**
+ * Type: GET
+ * Route: /login
+ * Description: Should send a greeting
+ * to the signed on user
+ * */
 app.get('/login', (req, res) => {
+   const { username } = req.cookies;
+   const user = USERS.find(x => x.username == username);
+   const { fullName } = user;
+
    res.json({
-      username: 'Hello'
+      username, fullName
    });
 });
 
@@ -30,6 +43,7 @@ app.post('/login', (req, res) => {
    const user = USERS.find(x => x.username === username && x.password == password);
 
    if(user) {
+      res.cookie('username', username)
       res.sendStatus(200);
    } else {
       res.sendStatus(401);
