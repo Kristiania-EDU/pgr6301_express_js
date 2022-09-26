@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(express.static('public'));
 
 const USERS = [
    {
@@ -21,9 +22,8 @@ const USERS = [
  * to the signed on user
  * */
 app.get('/login', (req, res) => {
-   const { username } = req.cookies;
-   const user = USERS.find(x => x.username == username);
-   const { fullName } = user;
+   const user = USERS.find(x => x.username === req.cookies.username);
+   const { username, fullName } = user;
 
    res.json({
       username, fullName
